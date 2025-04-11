@@ -143,6 +143,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Install AZ CLI
+        run : curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
       - uses: azure/login@v2
         name: Azure Login
         with:
