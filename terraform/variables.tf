@@ -18,7 +18,15 @@ variable "pip_name" {
   type = string
 }
 
+variable "pip_sonar_name" {
+  type = string
+}
+
 variable "nic_name" {
+  type = string
+}
+
+variable "nic_name_sonar" {
   type = string
 }
 
@@ -48,5 +56,13 @@ variable "vm_name" {
   type = string
 }
 variable "vm_sku_size" {
+  type = string
+}
+
+variable "vm_name_sonar" {
+  type = string
+}
+
+variable "nic_sonar_id" {
   type = string
 }

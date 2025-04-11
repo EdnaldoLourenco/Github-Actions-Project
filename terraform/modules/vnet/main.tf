@@ -24,6 +24,17 @@ resource "azurerm_public_ip" "pip-terraform" {
   }
 }
 
+resource "azurerm_public_ip" "pip-sonar" {
+  name                = var.pip_sonar_name
+  resource_group_name = var.rg_name
+  location            = var.rg_location
+  allocation_method   = "Static"
+
+  tags = {
+    environment = "Production"
+  }
+}
+
 resource "azurerm_network_interface" "nic-terraform" {
   name                = var.nic_name
   location            = var.rg_location
@@ -37,6 +48,18 @@ resource "azurerm_network_interface" "nic-terraform" {
   }
 }
 
+resource "azurerm_network_interface" "nic-sonar" {
+  name                = var.nic_name_sonar
+  location            = var.rg_location
+  resource_group_name = var.rg_name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.sub-vm.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pip-sonar.id
+  }
+}
 
 resource "azurerm_network_security_group" "nsg-terraform" {
   name                = var.nsg_name

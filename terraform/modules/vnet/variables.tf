@@ -19,10 +19,16 @@ variable "pip_name" {
   type = string
 }
 
+variable "pip_sonar_name" {
+  type = string
+}
 variable "nic_name" {
   type = string
 }
 
+variable "nic_name_sonar" {
+  type = string
+}
 variable "nsg_name" {
   type = string
 }
