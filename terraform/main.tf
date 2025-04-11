@@ -3,6 +3,11 @@ resource "azurerm_resource_group" "rg" {
   location = "westus2"
 }
 
+resource "azurerm_resource_group" "rg-aks" {
+  name     = "rg-aks"
+  location = "westus"
+}
+
 module "vnet" {
   source = "./modules/vnet"
 
@@ -34,4 +39,14 @@ module "vm" {
   vm_sku_size   = var.vm_sku_size
   depends_on    = [module.vnet]
 
+}
+
+module "aks" {
+  source = "./modules/aks"
+
+  rg_name     = azurerm_resource_group.rg-aks.name
+  rg_location = azurerm_resource_group.rg-aks.location
+  aks_name    = var.aks_name
+  aks_dns     = var.aks_dns
+  depends_on  = [module.vnet]
 }

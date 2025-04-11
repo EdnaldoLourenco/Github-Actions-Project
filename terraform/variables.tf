@@ -66,3 +66,9 @@ variable "vm_name_sonar" {
 variable "nic_sonar_id" {
   type = string
 }
+variable "aks_dns" {
+  type = string
+}
+variable "aks_name" {
+  type = string
+}
